@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    
+
+    <!-- 一级页面公共部分 -->
+    
+        <link href="css/font-awesome.css" />
+        <link rel="stylesheet" href="css/ai-common-logonavi.css"/>
+    
+
+    <!-- 二级页面公共部分 -->
+    
+
+    <!-- 三级页面公共部分 -->
+    
+    <link rel="stylesheet" href="css/ai-usercss-overall.css">
+
+
+    
+    <title>欢迎您来到个人分享空间！</title>
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?964ddfb9112be4e7ef600a41163fd6b6";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+
+
+    <div class="ai-logonavi-box" id="totop-anchor">
+        <div class="ai-logonavi-navibar">
+            <div class="ai-logonavi-left">
+                <a href="/" class="ai-logonavi-logo">欢迎来到个人分享空间<!--<img src="images/logo.png">--></a>
+                <ul class="ai-logonavi-list none">
+                    
+                    <li><a href="/news/index/">新闻中心</a></li>
+                    
+                    
+                    <li><a href="/blog/index/">博客空间</a></li>
+                    
+                    
+                    <li><a href="/develope/index/">开发社区</a></li>
+                    
+                    <li><a href="/course/index/">课程中心</a></li>
+                    
+                    <li><a href="/jobs/index/">招聘专区</a></li>
+                    
+                    <li><a href="/topic/index/">话题问答</a></li>
+                    <li><a href="/colledge/index/">学术联盟</a></li>
+                </ul>
+            </div>
+            <div class="ai-logonavi-right">
+                
+                    <div class="ai-logonavi-search">
+                        <form>
+                            <input class="ai-logonavi-seinput" type="text" required name="keyword" placeholder="search..."/>
+                            <input class="ai-logonavi-sesmt slide-right-btn fa  fa-search-minus" type="submit" value="搜索"/>
+                        </form>
+                    </div>
+                
+
+                
+                    
+                        <a class="ai-logonavi-login" href="/user/login/"><i class='fa fa-user-o'></i>&nbsp;登录</a>
+                    
+                    <a class="ai-logonavi-register" href="/user/register/"><i class="fa fa-address-card-o"></i>&nbsp;注册</a>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="ai-register-box" data-heigth="0">
+        <div class="ai-register-lizi" data-height="0"></div>
+        <div class="ai-register-card-login">
+            <p class="ai-register-logo"><a href="/">StudyAi</a></p>
+            <form class="ai-login-form" id="email_register_form" action="/user/login/" method="post" enctype="multipart/form-data" autocomplete="on">
+                <input type='hidden' name='csrfmiddlewaretoken' value='mrOQoqne8de7DsMmrttb5KRrmEx4Ew7j' />
+                <input class="ai-logcard-email" id="id_username" maxlength="128" name="username" placeholder="邮箱账号" type="text" />
+                
+                <input class="ai-logcard-paswd" id="id_password" name="password" placeholder="输入密码" type="password" />
+                
+                <p class="ai-login-msg"></p>
+                <div class="ai-regcard-okreg">
+                    <input class="ai-regcard-regin" type="submit"  value="登录"></input>
+                    <a class="ai-regcard-regin" href="/user/register/">注册</a>
+                </div>
+            </form>
+            <div class="ai-logcard-sns">
+                <a class="ai-logcard-weixin"><i class="fa fa-weixin"></i></a>
+                <a class="ai-logcard-qq"><i class="fa fa-qq"></i></a>
+                <a class="ai-logcard-github"><i class="fa fa-github"></i></a>
+            </div>
+            <div class="ai-regcard-okfind">
+                <a class="ai-regcard-detail" href="/user/register/">注册</a>
+                <a class="ai-regcard-forget" href="/user/findpwd/">找回密码</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+    <!-- 一级页面公共JS -->
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 導航
+            $('.ai-logonavi-logo').on("mouseenter", function () {
+                $('.ai-logonavi-list').show();
+            }).on("mouseleave",function () {
+                $('.ai-logonavi-list').hide();
+            });
+            $('.ai-logonavi-list').on("mouseenter", function () {
+                $('.ai-logonavi-list').show();
+            }).on("mouseleave",function () {
+                $('.ai-logonavi-list').hide();
+            });
+        })
+    </script>
+
+
+
+    <script src="js/particleground.all.js"></script>
+    <script src="js/particle.js"></script>
+    <script>
+        $(function () {
+            $('.ai-register-lizi').css({"height":window.innerHeight});
+            new Particleground.particle('.ai-register-lizi');
+        });
+        //刷新验证码
+        function refresh_captcha(event){
+            $.get("/captcha/refresh/?"+Math.random(), function(result){
+                $('#'+event.data.form_id+' .captcha').attr("src",result.image_url);
+                $('#id_captcha_0').attr("value",result.key);
+            });
+            return false;
+        }
+        //注册刷新验证码点击事件
+        $('#email_register_form .captcha').click({'form_id':'email_register_form'},refresh_captcha);
+    </script>
+
+
+</html>
